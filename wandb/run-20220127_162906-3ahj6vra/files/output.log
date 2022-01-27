@@ -1,0 +1,23 @@
+Load ckpt from ./convnext_base_1k_384.pth
+Load state_dict by model_key = model
+Removing key head.weight from pretrained checkpoint
+Removing key head.bias from pretrained checkpoint
+Weights of ConvNeXt not initialized from pretrained model: ['head.weight', 'head.bias']
+Traceback (most recent call last):
+  File "main.py", line 477, in <module>
+    main(args)
+  File "main.py", line 309, in main
+    model.to(device)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/torch/nn/modules/module.py", line 673, in to
+    return self._apply(convert)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/torch/nn/modules/module.py", line 409, in _apply
+    param_applied = fn(param)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/torch/nn/modules/module.py", line 671, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+RuntimeError: CUDA error: out of memory

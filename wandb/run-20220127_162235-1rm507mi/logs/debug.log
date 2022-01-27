@@ -1,0 +1,30 @@
+2022-01-27 16:22:35,244 INFO    MainThread:3240122 [wandb_setup.py:_flush():71] setting env: {}
+2022-01-27 16:22:35,245 INFO    MainThread:3240122 [wandb_setup.py:_flush():71] setting login settings: {}
+2022-01-27 16:22:35,245 INFO    MainThread:3240122 [wandb_init.py:_log_setup():371] Logging user logs to /home/uzair.khattak/CV703/assignment1/ConvNeXt-main/wandb/run-20220127_162235-1rm507mi/logs/debug.log
+2022-01-27 16:22:35,245 INFO    MainThread:3240122 [wandb_init.py:_log_setup():372] Logging internal logs to /home/uzair.khattak/CV703/assignment1/ConvNeXt-main/wandb/run-20220127_162235-1rm507mi/logs/debug-internal.log
+2022-01-27 16:22:35,245 INFO    MainThread:3240122 [wandb_init.py:init():404] calling init triggers
+2022-01-27 16:22:35,245 INFO    MainThread:3240122 [wandb_init.py:init():409] wandb.init called with sweep_config: {}
+config: {'batch_size': 32, 'epochs': 30, 'update_freq': 2, 'model': 'convnext_base', 'drop_path': 0.8, 'input_size': 384, 'layer_scale_init_value': 1e-06, 'model_ema': False, 'model_ema_decay': 0.9999, 'model_ema_force_cpu': False, 'model_ema_eval': False, 'opt': 'adamw', 'opt_eps': 1e-08, 'opt_betas': None, 'clip_grad': None, 'momentum': 0.9, 'weight_decay': 1e-08, 'weight_decay_end': None, 'lr': 5e-05, 'layer_decay': 0.7, 'min_lr': 1e-06, 'warmup_epochs': 0, 'warmup_steps': -1, 'color_jitter': 0.4, 'aa': 'rand-m9-mstd0.5-inc1', 'smoothing': 0.1, 'train_interpolation': 'bicubic', 'crop_pct': None, 'reprob': 0.25, 'remode': 'pixel', 'recount': 1, 'resplit': False, 'mixup': 0.0, 'cutmix': 0.0, 'cutmix_minmax': None, 'mixup_prob': 1.0, 'mixup_switch_prob': 0.5, 'mixup_mode': 'batch', 'finetune': './convnext_base_1k_384.pth', 'head_init_scale': 0.001, 'model_key': 'model|module', 'model_prefix': '', 'data_path': '/l/users/u21010225/AssignmentNo1/CUB/CUB_200_2011/', 'eval_data_path': None, 'nb_classes': 200, 'imagenet_default_mean_and_std': True, 'data_set': 'CUB', 'output_dir': './', 'log_dir': None, 'device': 'cuda', 'seed': 0, 'resume': '', 'auto_resume': True, 'save_ckpt': True, 'save_ckpt_freq': 1, 'save_ckpt_num': 3, 'start_epoch': 0, 'eval': False, 'dist_eval': True, 'disable_eval': False, 'num_workers': 10, 'pin_mem': True, 'world_size': 1, 'local_rank': -1, 'dist_on_itp': False, 'dist_url': 'env://', 'use_amp': False, 'enable_wandb': False, 'project': 'convnext', 'wandb_ckpt': False, 'distributed': False}
+2022-01-27 16:22:35,245 INFO    MainThread:3240122 [wandb_init.py:init():460] starting backend
+2022-01-27 16:22:35,245 INFO    MainThread:3240122 [backend.py:_multiprocessing_setup():99] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2022-01-27 16:22:35,266 INFO    MainThread:3240122 [backend.py:ensure_launched():216] starting backend process...
+2022-01-27 16:22:35,308 INFO    MainThread:3240122 [backend.py:ensure_launched():221] started backend process with pid: 3240151
+2022-01-27 16:22:35,332 INFO    MainThread:3240122 [wandb_init.py:init():469] backend started and connected
+2022-01-27 16:22:35,340 INFO    MainThread:3240122 [wandb_init.py:init():533] updated telemetry
+2022-01-27 16:22:35,342 INFO    MainThread:3240122 [wandb_init.py:init():563] communicating current version
+2022-01-27 16:22:36,461 INFO    MainThread:3240122 [wandb_init.py:init():568] got version response 
+2022-01-27 16:22:36,462 INFO    MainThread:3240122 [wandb_init.py:init():578] communicating run to backend with 30 second timeout
+2022-01-27 16:22:36,844 INFO    MainThread:3240122 [wandb_init.py:init():606] starting run threads in backend
+2022-01-27 16:22:36,956 INFO    MainThread:3240122 [wandb_run.py:_console_start():1810] atexit reg
+2022-01-27 16:22:36,957 INFO    MainThread:3240122 [wandb_run.py:_redirect():1684] redirect: SettingsConsole.REDIRECT
+2022-01-27 16:22:36,957 INFO    MainThread:3240122 [wandb_run.py:_redirect():1689] Redirecting console.
+2022-01-27 16:22:36,960 ERROR   MainThread:3240122 [wandb_run.py:_redirect():1748] Failed to redirect.
+Traceback (most recent call last):
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/wandb/sdk/wandb_run.py", line 1742, in _redirect
+    err_redir.install()
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/wandb/sdk/lib/redirect.py", line 718, in install
+    self._pipe_relay_thread.start()
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/threading.py", line 852, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+2022-01-27 16:22:36,978 INFO    MainThread:3240122 [wandb_init.py:init():633] run started, returning control to user process

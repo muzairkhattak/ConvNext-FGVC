@@ -1,0 +1,37 @@
+2022-01-27 16:22:14,030 INFO    MainThread:3235764 [wandb_setup.py:_flush():71] setting env: {}
+2022-01-27 16:22:14,030 INFO    MainThread:3235764 [wandb_setup.py:_flush():71] setting login settings: {}
+2022-01-27 16:22:14,030 INFO    MainThread:3235764 [wandb_setup.py:_flush():71] setting login settings: {'api_key': '***REDACTED***'}
+2022-01-27 16:22:14,031 INFO    MainThread:3235764 [wandb_init.py:_log_setup():371] Logging user logs to /home/uzair.khattak/CV703/assignment1/ConvNeXt-main/wandb/run-20220127_162214-159lfb0j/logs/debug.log
+2022-01-27 16:22:14,031 INFO    MainThread:3235764 [wandb_init.py:_log_setup():372] Logging internal logs to /home/uzair.khattak/CV703/assignment1/ConvNeXt-main/wandb/run-20220127_162214-159lfb0j/logs/debug-internal.log
+2022-01-27 16:22:14,033 INFO    MainThread:3235764 [wandb_init.py:init():404] calling init triggers
+2022-01-27 16:22:14,033 INFO    MainThread:3235764 [wandb_init.py:init():409] wandb.init called with sweep_config: {}
+config: {'batch_size': 32, 'epochs': 30, 'update_freq': 2, 'model': 'convnext_base', 'drop_path': 0.8, 'input_size': 384, 'layer_scale_init_value': 1e-06, 'model_ema': False, 'model_ema_decay': 0.9999, 'model_ema_force_cpu': False, 'model_ema_eval': False, 'opt': 'adamw', 'opt_eps': 1e-08, 'opt_betas': None, 'clip_grad': None, 'momentum': 0.9, 'weight_decay': 1e-08, 'weight_decay_end': None, 'lr': 5e-05, 'layer_decay': 0.7, 'min_lr': 1e-06, 'warmup_epochs': 0, 'warmup_steps': -1, 'color_jitter': 0.4, 'aa': 'rand-m9-mstd0.5-inc1', 'smoothing': 0.1, 'train_interpolation': 'bicubic', 'crop_pct': None, 'reprob': 0.25, 'remode': 'pixel', 'recount': 1, 'resplit': False, 'mixup': 0.0, 'cutmix': 0.0, 'cutmix_minmax': None, 'mixup_prob': 1.0, 'mixup_switch_prob': 0.5, 'mixup_mode': 'batch', 'finetune': './convnext_base_1k_384.pth', 'head_init_scale': 0.001, 'model_key': 'model|module', 'model_prefix': '', 'data_path': '/l/users/u21010225/AssignmentNo1/CUB/CUB_200_2011/', 'eval_data_path': None, 'nb_classes': 200, 'imagenet_default_mean_and_std': True, 'data_set': 'CUB', 'output_dir': './', 'log_dir': None, 'device': 'cuda', 'seed': 0, 'resume': '', 'auto_resume': True, 'save_ckpt': True, 'save_ckpt_freq': 1, 'save_ckpt_num': 3, 'start_epoch': 0, 'eval': False, 'dist_eval': True, 'disable_eval': False, 'num_workers': 10, 'pin_mem': True, 'world_size': 1, 'local_rank': -1, 'dist_on_itp': False, 'dist_url': 'env://', 'use_amp': False, 'enable_wandb': False, 'project': 'convnext', 'wandb_ckpt': False, 'distributed': False}
+2022-01-27 16:22:14,033 INFO    MainThread:3235764 [wandb_init.py:init():460] starting backend
+2022-01-27 16:22:14,033 INFO    MainThread:3235764 [backend.py:_multiprocessing_setup():99] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2022-01-27 16:22:14,194 ERROR   MainThread:3235764 [wandb_init.py:init():958] error
+Traceback (most recent call last):
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 931, in init
+    run = wi.init()
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 467, in init
+    backend.ensure_launched()
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/site-packages/wandb/sdk/backend/backend.py", line 185, in ensure_launched
+    self.record_q = self._multiprocessing.Queue()
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/context.py", line 103, in Queue
+    return Queue(maxsize, ctx=self.get_context())
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/queues.py", line 42, in __init__
+    self._rlock = ctx.Lock()
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/context.py", line 68, in Lock
+    return Lock(ctx=self.get_context())
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/synchronize.py", line 162, in __init__
+    SemLock.__init__(self, SEMAPHORE, 1, 1, ctx=ctx)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/synchronize.py", line 80, in __init__
+    register(self._semlock.name, "semaphore")
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/resource_tracker.py", line 147, in register
+    self._send('REGISTER', name, rtype)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/resource_tracker.py", line 154, in _send
+    self.ensure_running()
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/resource_tracker.py", line 121, in ensure_running
+    pid = util.spawnv_passfds(exe, args, fds_to_pass)
+  File "/home/uzair.khattak/.conda/envs/convnext/lib/python3.8/multiprocessing/util.py", line 452, in spawnv_passfds
+    return _posixsubprocess.fork_exec(
+BlockingIOError: [Errno 11] Resource temporarily unavailable
