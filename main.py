@@ -144,15 +144,18 @@ def get_args_parser():
     parser.add_argument('--model_prefix', default='', type=str)
 
     # Dataset parameters
-    parser.add_argument('--data_path', default='/l/users/u21010225/AssignmentNo1/CUB/CUB_200_2011/', type=str,
+    parser.add_argument('--data-path', default='/l/users/u21010225/AssignmentNo1/CUB/CUB_200_2011/ /l/users/u21010225/AssignmentNo1/dog/',
+                        choices=['/l/users/u21010225/AssignmentNo1/CUB/CUB_200_2011/',
+                                 '/l/users/u21010225/AssignmentNo1/CUB/CUB_200_2011/ /l/users/u21010225/AssignmentNo1/dog/',
+                                 '/l/users/u21010225/AssignmentNo1/FoodX/food_dataset'],  type=str,
                         help='dataset path')
     parser.add_argument('--eval_data_path', default=None, type=str,
                         help='dataset path for evaluation')
     parser.add_argument('--nb_classes', default=200, type=int,
                         help='number of the classification types')
     parser.add_argument('--imagenet_default_mean_and_std', type=str2bool, default=True)
-    parser.add_argument('--data_set', default='CUB', choices=['CIFAR', 'IMNET', 'image_folder', 'CUB'],
-                        type=str, help='ImageNet dataset path')
+    parser.add_argument('--data-set', default='CUB_DOG', choices=['CUB', 'FOOD', 'CUB_DOG', 'CIFAR', 'IMNET', 'INAT', 'INAT19'],
+                        type=str, help='Image Net dataset path')
     parser.add_argument('--output_dir', default='',
                         help='path where to save, empty for no saving')
     parser.add_argument('--log_dir', default=None,
@@ -200,6 +203,7 @@ def get_args_parser():
                         help="Save model checkpoints as W&B Artifacts.")
 
     return parser
+
 
 def main(args):
     utils.init_distributed_mode(args)

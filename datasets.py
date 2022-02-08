@@ -12,12 +12,14 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.optim import lr_scheduler
 import numpy as np
-import torchvision
 from torchvision import datasets, models, transforms
 import matplotlib.pyplot as plt
 import time
 import os
 # import copycleclear
+import torchvision
+import scipy.io
+from PIL import Image
 
 import os
 from torchvision import datasets, transforms
@@ -65,7 +67,36 @@ def build_dataset(is_train, args):
         nb_classes = args.nb_classes
         assert len(dataset.class_to_idx) == nb_classes
 
+    elif args.data_set == "CUB_DOG":
+        # This time we will have 2 datasets
+        root1 = args.data_path.split(' ')[0]
+        root2 = args.data_path.split(' ')[1]
+        print("reading from datapath", root1)
+        print("reading from datapath", root2)
+        if is_train:
+            dataset1 = CUBDataset(image_root_path=root1, transform=transform, split="train")
+            dataset2 = DOGDataset(image_root_path=root2, transform=transform, split="train")
+            dataset = ConcatDataset([dataset1, dataset2])
+        else:
+            dataset1 = CUBDataset(image_root_path=root1, transform=transform, split="test")
+            dataset2 = DOGDataset(image_root_path=root2, transform=transform, split="test")
+            dataset = ConcatDataset([dataset1, dataset2])
 
+        nb_classes = 320
+        # assert len(dataset.class_to_idx) == nb_classes
+
+    elif args.data_set == "FOOD":
+
+        if is_train:
+            train_df = pd.read_csv(f'{args.data_path}/annot/train_info.csv', names=['image_name', 'label'])
+            train_df['path'] = train_df['image_name'].map(lambda x: os.path.join(f'{args.data_path}/train_set/', x))
+            dataset = FOODDataset(train_df, transform=transform)
+        else:
+            val_df = pd.read_csv(f'{args.data_path}/annot/val_info.csv', names=['image_name', 'label'])
+            val_df['path'] = val_df['image_name'].map(lambda x: os.path.join(f'{args.data_path}/val_set/', x))
+            dataset = FOODDataset(val_df, transform=transform)
+        nb_classes = 251
+        # assert len(dataset.class_to_idx) == nb_classes
     else:
         raise NotImplementedError()
     print("Number of the class = %d" % nb_classes)
@@ -133,7 +164,7 @@ class CUBDataset(torchvision.datasets.ImageFolder):
         Args:
             image_root_path:      path to dir containing images and lists folders
             caption_root_path:    path to dir containing captions
-            split:          train / test
+            split:          train / testz
             *args:
             **kwargs:
         """
@@ -155,3 +186,140 @@ class CUBDataset(torchvision.datasets.ImageFolder):
         with open(file_path) as fo:
             content = fo.readlines()
         return content
+
+
+class DOGDataset(torchvision.datasets.ImageFolder):
+    """
+    Dataset class for DOG Dataset
+    """
+
+    def __init__(self, image_root_path, caption_root_path=None, split="train", *args, **kwargs):
+        """
+        Args:
+            image_root_path:      path to dir containing images and lists folders
+            caption_root_path:    path to dir containing captions
+            split:          train / test
+            *args:
+            **kwargs:
+        """
+        image_info = self.get_file_content(f"{image_root_path}splits/file_list.mat")
+        image_files = [o[0][0] for o in image_info]
+
+        split_info = self.get_file_content(f"{image_root_path}/splits/{split}_list.mat")
+        split_files = [o[0][0] for o in split_info]
+        self.split_info = {}
+        if split == 'train':
+            for image in image_files:
+                if image in split_files:
+                    self.split_info[image] = "1"
+                else:
+                    self.split_info[image] = "0"
+        elif split == 'test':
+            for image in image_files:
+                if image in split_files:
+                    self.split_info[image] = "0"
+                else:
+                    self.split_info[image] = "1"
+
+        self.split = "1" if split == "train" else "0"
+        self.caption_root_path = caption_root_path
+
+        super(DOGDataset, self).__init__(root=f"{image_root_path}Images", is_valid_file=self.is_valid_file,
+                                         *args, **kwargs)
+
+        ## modify class index as we are going to concat to first dataset
+        self.class_to_idx = {class_: idx + 200 for idx, class_ in enumerate(self.class_to_idx)}
+
+    def is_valid_file(self, x):
+        return self.split_info[(x[len(self.root) + 1:])] == self.split
+
+    def __getitem__(self, index):
+        path, target = self.imgs[index]
+        img = Image.open(os.path.join(path)).convert('RGB')
+        if self.transform is not None:
+            img = self.transform(img)
+        if self.target_transform is not None:
+            target = self.target_transform(target)
+
+        ## modify target class index as we are going to concat to first dataset
+        return img, target + 200
+
+    @staticmethod
+    def get_file_content(file_path):
+        content = scipy.io.loadmat(file_path)
+        return content['file_list']
+
+    class DOGDataset(torchvision.datasets.ImageFolder):
+        """
+        Dataset class for DOG Dataset
+        """
+
+        def __init__(self, image_root_path, caption_root_path=None, split="train", *args, **kwargs):
+            """
+            Args:
+                image_root_path:      path to dir containing images and lists folders
+                caption_root_path:    path to dir containing captions
+                split:          train / test
+                *args:
+                **kwargs:
+            """
+            image_info = self.get_file_content(f"{image_root_path}splits/file_list.mat")
+            image_files = [o[0][0] for o in image_info]
+
+            split_info = self.get_file_content(f"{image_root_path}/splits/{split}_list.mat")
+            split_files = [o[0][0] for o in split_info]
+            self.split_info = {}
+            if split == 'train':
+                for image in image_files:
+                    if image in split_files:
+                        self.split_info[image] = "1"
+                    else:
+                        self.split_info[image] = "0"
+            elif split == 'test':
+                for image in image_files:
+                    if image in split_files:
+                        self.split_info[image] = "0"
+                    else:
+                        self.split_info[image] = "1"
+
+            self.split = "1" if split == "train" else "0"
+            self.caption_root_path = caption_root_path
+
+            super(DOGDataset, self).__init__(root=f"{image_root_path}Images", is_valid_file=self.is_valid_file,
+                                             *args, **kwargs)
+
+            ## modify class index as we are going to concat to first dataset
+            self.class_to_idx = {class_: idx + 200 for idx, class_ in enumerate(self.class_to_idx)}
+
+        def is_valid_file(self, x):
+            return self.split_info[(x[len(self.root) + 1:])] == self.split
+
+        def __getitem__(self, index):
+            path, target = self.imgs[index]
+            img = Image.open(os.path.join(path)).convert('RGB')
+            if self.transform is not None:
+                img = self.transform(img)
+            if self.target_transform is not None:
+                target = self.target_transform(target)
+
+            ## modify target class index as we are going to concat to first dataset
+            return img, target + 200
+
+        @staticmethod
+        def get_file_content(file_path):
+            content = scipy.io.loadmat(file_path)
+            return content['file_list']
+
+    class FOODDataset(torch.utils.data.Dataset):
+        def __init__(self, dataframe, transform):
+            self.dataframe = dataframe
+            self.data_transform = transform
+
+        def __len__(self):
+            return len(self.dataframe)
+
+        def __getitem__(self, index):
+            row = self.dataframe.iloc[index]
+            return (
+                self.data_transform(Image.open(row["path"])), row['label']
+            )
