@@ -62,7 +62,6 @@ dog_dataset_root_folder/
         ├─ n02101388-Brittany_spaniel
             ├─ ....
         ├─ ....
-        
     └─ splits
         ├─ file_list.mat
         ├─ test_list.mat
