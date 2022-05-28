@@ -13,7 +13,7 @@ This repository adds data-loader supports for 3 fine-grained visual classificati
     </li>
   </ul>
   
-This code repo is forked from official [ConvNeXt repository](https://github.com/facebookresearch/ConvNeXt)
+This code repo is forked and modified from official [ConvNeXt repository](https://github.com/facebookresearch/ConvNeXt)
 This repo was mainly designed to make a strong ConvNeXt teacher model trained on FGVC dataset and use it to distill knowledge into DeiT model. Please refer here to our DeiT Knowledge distillation repository for complete project details.
 
 ## Requirements and Installation
