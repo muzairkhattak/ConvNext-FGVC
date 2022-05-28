@@ -13,8 +13,7 @@ This repository adds data-loader supports for 3 fine-grained visual classificati
     </li>
   </ul>
   
-This code repo is forked and modified from official [ConvNeXt repository](https://github.com/facebookresearch/ConvNeXt)
-This repo was mainly designed to make a strong ConvNeXt teacher model trained on FGVC dataset and use it to distill knowledge into DeiT model. Please refer here to our DeiT Knowledge distillation repository for complete project details.
+This repo was mainly designed to make a strong ConvNeXt teacher model trained on FGVC dataset and use it to distill knowledge into DeiT model. Please refer here to [our DeiT Knowledge distillation](https://github.com/MUKhattak/DeiT_ConvNeXt_KnowledgeDistillation) repository for complete project details.
 
 ## Requirements and Installation
 We have tested this code on Ubuntu 20.04 LTS with Python 3.8. 
@@ -98,5 +97,5 @@ python main.py --model convnext_base --data-set CUB_DOG --eval true --resume /pa
 
 --- 
 Acknowledgement:
-This repo is based on official [ConvNeXt repository](https://github.com/facebookresearch/ConvNeXt)
+This code repo is forked and modified from official [ConvNeXt repository](https://github.com/facebookresearch/ConvNeXt)
 
