@@ -87,7 +87,7 @@ python main.py --model convnext_base --data-set CUB_DOG --drop_path 0.8 --input_
 
 <b>Note</b>: For CUB + DOG dataset, please provide both paths in the --data-set parameter, seperated by a space.
 
-For example: /l/users/u21010225/AssignmentNo1/CUB/CUB_200_2011/ /l/users/u21010225/AssignmentNo1/dog/
+For example: ```/l/users/u21010225/AssignmentNo1/CUB/CUB_200_2011/ /l/users/u21010225/AssignmentNo1/dog/```
 
 Similarly to train ConvNeXt on FoodX dataset, replace  ```CUB``` by ```FOOD``` in the ```--data-set``` argument and corresponding dataset path in above sample commands.
 
